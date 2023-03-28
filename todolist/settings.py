@@ -6,7 +6,7 @@ from envparse import env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env.read_envfile('/todolist/.env')
+env.read_envfile('.env')
 
 SECRET_KEY = env('SECRET_KEY')
 
@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'envparse',
     'core',
 ]
 
