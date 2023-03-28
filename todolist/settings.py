@@ -6,6 +6,8 @@ from envparse import env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env.read_envfile('/todolist/.env')
+
 SECRET_KEY = env('SECRET_KEY')
 
 DEBUG = env.bool('DEBUG', default=False)
