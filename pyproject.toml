@@ -12,6 +12,8 @@ django = "^4.2"
 envparse = "^0.2.0"
 django-extensions = "^3.2.1"
 psycopg2-binary = "^2.9.6"
+djangorestframework = "^3.14.0"
+drf-spectacular = "^0.26.2"
 
 
 [build-system]

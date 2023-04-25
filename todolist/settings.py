@@ -26,9 +26,6 @@ INSTALLED_APPS = [
     'core',
 ]
 
-from pathlib import Path
-from envparse import env
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_PATH = BASE_DIR.joinpath('.env')
 
@@ -51,6 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Second-party apps
+    'rest_framework',
+    'drf_spectacular',
     # First-party apps
     'core',
 ]
@@ -108,18 +108,10 @@ AUTH_USER_MODEL = 'core.User'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 
@@ -145,3 +137,13 @@ STATIC_ROOT = BASE_DIR.joinpath('static')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Todolist API',
+    'DESCRIPTION': 'My first full API',
+    'VERSION': '1.0.0',
+}
