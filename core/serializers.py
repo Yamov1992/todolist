@@ -5,6 +5,12 @@ from core.models import User
 from todolist.fields import PasswordField
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'email')
+
+
 class CreateUserSerializer(serializers.ModelSerializer):
     password = PasswordField(required=True, write_only=False)
     password_repeat = PasswordField(required=True)
@@ -19,7 +25,11 @@ class CreateUserSerializer(serializers.ModelSerializer):
         return attrs
 
 
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'email')
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
+    password = PasswordField(required=True)
+
+
+class UpdatePasswordSerializer(serializers.Serializer):
+    old_password = PasswordField(required=True)
+    new_password = PasswordField(required=True)

@@ -14,6 +14,7 @@ django-extensions = "^3.2.1"
 psycopg2-binary = "^2.9.6"
 djangorestframework = "^3.14.0"
 drf-spectacular = "^0.26.2"
+social-auth-app-django = "^5.2.0"
 
 
 [build-system]
