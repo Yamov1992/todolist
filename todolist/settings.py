@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 from envparse import env
@@ -14,32 +13,6 @@ DEBUG = env.bool('DEBUG', default=False)
 
 ALLOWED_HOSTS = ["*"]
 
-# Application definition
-
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'core',
-]
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-ENV_PATH = BASE_DIR.joinpath('.env')
-
-if ENV_PATH.is_file():
-    env.read_envfile(ENV_PATH)
-
-
-SECRET_KEY = env('SECRET_KEY')
-
-DEBUG = env.bool('DEBUG', default=False)
-
-ALLOWED_HOSTS = ['*']
-
-
 INSTALLED_APPS = [
     # Django apps
     'django.contrib.admin',
@@ -50,10 +23,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Second-party apps
     'rest_framework',
+    'django_filters',
     'drf_spectacular',
     'social_django',
     # First-party apps
     'core',
+    'todolist.goals',
 ]
 
 if DEBUG:
@@ -152,6 +127,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 REST_FRAMEWORK = {
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
