@@ -4,6 +4,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import generics, permissions
 from rest_framework.filters import SearchFilter
+from rest_framework.pagination import LimitOffsetPagination
 
 from todolist.goals.filters import GoalDateFilter
 from todolist.goals.models import GoalCategory, Goal
@@ -23,6 +24,7 @@ class GoalCategoryListView(generics.ListAPIView):
     ordering_fields = ('title', 'created')
     ordering = ['title']
     search_fields = ['title']
+    pagination_class = LimitOffsetPagination
 
     def get_queryset(self):
         return GoalCategory.objects.select_related('user').filter(user=self.request.user, is_deleted=False)
