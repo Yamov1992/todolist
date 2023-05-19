@@ -27,7 +27,7 @@ services:
       - django_static:/opt/static
 
   bot:
-    build: .
+    image: iyamov/bot
     env_file: .env
     environment:
       POSTGRES_HOST: db
