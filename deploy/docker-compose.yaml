@@ -27,6 +27,8 @@ services:
       - django_static:/opt/static
 
   bot:
+      image: iyamov/diploma_12:latest
+      env_file: .env
     environment:
       POSTGRES_HOST: db
     depends_on:
