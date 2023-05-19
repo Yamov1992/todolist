@@ -11,4 +11,4 @@ class TgUser(models.Model):
 
     @staticmethod
     def generate_verification_code() -> str:
-        return str(uuid4)
+        return str(uuid4())
