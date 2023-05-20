@@ -58,18 +58,6 @@ services:
         condition: service_healthy
     command: python manage.py runbot
 
-
-  frontend:
-    image: sermalenk/skypro-front:lesson-38
-    ports:
-      - "80:80"
-    depends_on:
-      api:
-        condition: service_started
-    volumes:
-      - ./core:/opt/core
-      - ./todolist:/opt/todolist
-
 volumes:
   pg_diploma_data:
   django_static:
