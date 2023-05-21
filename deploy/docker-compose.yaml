@@ -9,14 +9,14 @@ services:
         - name: clone code
           uses: actions/checkout@v2
         - name: docker build
-          run: docker build -t lenzikeva/skypro_eportnova:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
+          run: docker build -t lenzikeva/skypro_eportnova
         - name: docker login
           uses: docker/login-action@v2
           with:
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_TOKEN }}
         - name: docker push
-          run: docker push lenzikeva/skypro_eportnova:$GITHUB_REF_NAME-$GITHUB_RUN_ID
+          run: docker push lenzikeva/skypro_eportnova
 
   db:
     image: postgres:15.1
