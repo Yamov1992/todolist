@@ -4,7 +4,7 @@ services:
 
   jobs:
     build:
-      runs-on: ubuntu-latest
+
       steps:
         - name: clone code
           uses: actions/checkout@v2
