@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     # First-party apps
     'core',
     'todolist.goals',
+    'bot',
 ]
 
 if DEBUG:
@@ -125,6 +126,8 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )
+
+BOT_TOKEN = env.str('BOT_TOKEN')
 
 REST_FRAMEWORK = {
 

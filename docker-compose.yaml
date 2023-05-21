@@ -32,11 +32,13 @@ services:
       - "8000:8000"
     volumes:
       - ./core:/opt/core
+      - ./goals:/opt/goals
       - ./todolist:/opt/todolist
+      - ./bot:/opt/bot
       - django_static:/opt/static
 
   frontend:
-    image: sermalenk/skypro-front:lesson-36
+    image: sermalenk/skypro-front:lesson-38
     ports:
       - "80:80"
     depends_on:
@@ -45,6 +47,16 @@ services:
     volumes:
       - ./core:/opt/core
       - ./todolist:/opt/todolist
+
+  bot:
+    build: .
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python manage.py runbot
 
 volumes:
   pg_diploma_data:

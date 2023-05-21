@@ -2,6 +2,22 @@ version: '3.8'
 
 services:
 
+  jobs:
+    build_and_push:
+      runs-on: ubuntu-latest
+      steps:
+        - name: clone code
+          uses: actions/checkout@v2
+        - name: docker build
+          run: docker build -t lenzikeva/skypro_eportnova
+        - name: docker login
+          uses: docker/login-action@v2
+          with:
+            username: $${{ secrets.DOCKER_USERNAME }}
+            password: $${{ secrets.DOCKER_TOKEN }}
+        - name: docker push
+          run: docker push lenzikeva/skypro_eportnova
+
   db:
     image: postgres:15.1
     restart: always
@@ -26,8 +42,18 @@ services:
     volumes:
       - django_static:/opt/static
 
+  bot:
+    image: iyamov/diploma_12:latest
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+    depends_on:
+      db:
+        condition: service_healthy
+    command: python ./manage.py runbot
+
   frontend:
-    image: sermalenk/skypro-front:lesson-36
+    image: sermalenk/skypro-front:lesson-38
     ports:
       - "80:80"
     depends_on:
