@@ -3,8 +3,8 @@ version: '3.8'
 services:
 
   jobs:
-    build:
-
+    build_and_push:
+      runs-on: ubuntu-latest
       steps:
         - name: clone code
           uses: actions/checkout@v2
