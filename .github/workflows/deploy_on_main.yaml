@@ -10,33 +10,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: clone code
-        uses: actions/checkout@v2
-      - name: docker build
-        run: docker build -t lenzikeva/skypro_eportnova:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
-      - name: docker login
-        uses: docker/login-action@v2
+      - uses: actions/checkout@v3
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: docker push
-        run: docker push lenzikeva/skypro_eportnova:$GITHUB_REF_NAME-$GITHUB_RUN_ID
-
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: docker/setup-buildx-action@v2
-#      - uses: docker/login-action@v2
-#        with:
-#          username: ${{ secrets.DOCKERHUB_USERNAME }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-#      - uses: docker/build-push-action@v4
-#        with:
-#          push: true
-#          file: Dockerfile.prod
-#          tags: ${{ secrets.DOCKERHUB_USERNAME }}/todolist:latest
+      - uses: docker/build-push-action@v4
+        with:
+          push: true
+          file: Dockerfile.prod
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/todolist:latest
 
   deploy:
     needs: build
