@@ -7,7 +7,7 @@ on:
       - dev_38
 
 jobs:
-  build_and_push:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: clone code
