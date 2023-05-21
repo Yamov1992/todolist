@@ -13,8 +13,8 @@ services:
         - name: docker login
           uses: docker/login-action@v2
           with:
-            username: ${{ secrets.DOCKER_USERNAME }}
-            password: ${{ secrets.DOCKER_TOKEN }}
+            username: $${{ secrets.DOCKER_USERNAME }}
+            password: $${{ secrets.DOCKER_TOKEN }}
         - name: docker push
           run: docker push lenzikeva/skypro_eportnova
 
